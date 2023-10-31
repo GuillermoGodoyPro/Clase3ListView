@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.Toast
@@ -14,8 +15,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var spinner: Spinner
     private lateinit var lista: ListView
+    private lateinit var btUnion: Button
 
     private lateinit var nombre : String
+    private var nacion = "YoArgentino"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         spinner = findViewById(R.id.spinner)
         lista = findViewById(R.id.listVi)
+        btUnion = findViewById(R.id.btUnir)
 
 
         val nacionalidad = listOf("Argentina", "Bolivia","Colombia", "Paraguay","nose")
@@ -54,6 +58,18 @@ class MainActivity : AppCompatActivity() {
 
         lista.setOnItemClickListener{ adapterView, view, i ,l ->
             Toast.makeText(this, nacionalidad[i], Toast.LENGTH_LONG).show()
+            nacion = nacionalidad[i].toString()
+
+
+        }
+
+        btUnion.setOnClickListener {
+
+            val intent = Intent(this, SegundaActivity::class.java )
+            intent.putExtra("name", nombre)
+            intent.putExtra("nacional", nacion)
+
+            startActivity(intent)
 
         }
 

@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.Spinner
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var spinner: Spinner
+    private lateinit var lista: ListView
 
     private lateinit var nombre : String
 
@@ -21,8 +23,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         spinner = findViewById(R.id.spinner)
+        lista = findViewById(R.id.listVi)
 
-        val nombress = arrayOf("Alejandro", "Samuel","Luciano", "Tomas","Carolina")
+
+        val nacionalidad = listOf("Argentina", "Bolivia","Colombia", "Paraguay","nose")
         val nimbrish = arrayListOf("Alejandro", "Samuel","Luciano", "Tomas","Carolina Serrano")
         val mutableNombres = mutableListOf("Alejandro", "Samuel","Luciano", "Tomas","Carolina Serrano")
 
@@ -44,5 +48,14 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        val adapterListView = ArrayAdapter(this, android.R.layout.simple_list_item_1, nacionalidad)
+        lista.adapter = adapterListView
+
+        lista.setOnItemClickListener{ adapterView, view, i ,l ->
+            Toast.makeText(this, nacionalidad[i], Toast.LENGTH_LONG).show()
+
+        }
+
     }
 }
